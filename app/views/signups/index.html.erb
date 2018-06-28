@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <table>
+    <tr>
+      <td>Course Name</td>
+      <td>Course Content</td>
+      <td>Sign Up</td>
+    </tr>
+    <tr>
+      
+    
+  <h1>SignUpPage</h1>
+  <%@courses.each do |course|%>
+    <td><%=course.name%></td>
+    <td><%=course.content%></td>
+    <td>
+      <a href="/signups/<%=course.id%>">加入課程</a>
+    </td>
+  <%end%>
+
+
+    </tr>
+
+  </table>
+
+</body>
+</html>
