@@ -1,15 +1,63 @@
-<p id="notice"><%= notice %></p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-<p>
-  <strong>Name:</strong>
-  <%= @course.name %>
-</p>
+</head>
+<body>
 
-<p>
-  <strong>Content:</strong>
-  <%= @course.content %>
-</p>
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @course.name %>
+  </p>
+
+  <p>
+    <strong>Content:</strong>
+    <%= @course.content %>
+  </p>
+
+  <h5>Add Periods</h5>
+
+  <%= form_tag("/periods", method: "post") do %>
+    <input type="hidden" name="course_id" value="<%=params[:id]%>">
+    <div>
+      <%= label_tag(:class_date, "日期:") %><br>
+      <%= text_field_tag(:class_date,"", id: 'class_date')  %>
+    </div>
+    <div>
+      <%= label_tag(:start_time, "開始時間:") %><br>
+      <%= text_field_tag(:start_time,"", id: 'start_time')  %>
+    </div>
+    <div>
+      <%= label_tag(:time_span, "課程長度:") %>
+      <%=select_tag "time_span", "
+        <option value='0.5'>0.5</option>
+        <option value='1.0'>1.0</option>
+        <option value='1.5'>1.5</option>
+        <option value='2.0'>2.0</option>
+        <option value='2.5'>2.5</option>
+        <option value='3.0'>3.0</option>
+        <option value='3.5'>3.5</option>".html_safe%><span>小時</span><br>
+    </div>
+    <%= submit_tag("新增") %>
+  <% end %>
 
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+
+  <%= link_to 'Back', courses_path %>
+
+  <script type="text/javascript">
+    $("#start_time").flatpickr({enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i"});
+    $("#class_date").flatpickr();
+  </script>
+
+</body>
+</html>
+
+
